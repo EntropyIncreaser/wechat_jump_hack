@@ -79,7 +79,8 @@ public class Hack {
                         int pressY = 500 + RANDOM.nextInt(100);
                         String adbCommand = ADB_PATH + String.format(" shell input swipe %d %d %d %d %d", pressX, pressY, pressX, pressY, distance);
                         System.out.println(adbCommand);
-                        Runtime.getRuntime().exec(adbCommand);
+                        Runtime.getRuntime().exec(adbCommand).waitFor();
+                        Thread.sleep(1_000);
                     }
                 } else {
                     System.err.println("find myPos, fail");
@@ -88,12 +89,6 @@ public class Hack {
             } catch (Exception e) {
                 e.printStackTrace();
                 break;
-            }
-            try {
-                // sleep 随机时间，防止上传不了成绩
-                Thread.sleep(4_000 + RANDOM.nextInt(3000));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
 
         }
